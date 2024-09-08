@@ -11,10 +11,8 @@
     };
     spinner();
     
-    
     // Initiate the wowjs
     new WOW().init();
-
 
     // Sticky Navbar
     $(window).scroll(function () {
@@ -52,13 +50,11 @@
         }
     });
 
-
     // Facts counter
     $('[data-toggle="counter-up"]').counterUp({
         delay: 10,
         time: 2000
     });
-    
     
     // Back to top button
     $(window).scroll(function () {
@@ -72,7 +68,6 @@
         $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
         return false;
     });
-
 
     // Testimonials carousel
     $(".testimonial-carousel").owlCarousel({
@@ -97,13 +92,11 @@
         }
     });
 
-
     // Vendor carousel
     $('.vendor-carousel').owlCarousel({
         loop: true,
         margin: 45,
         dots: false,
-        loop: true,
         autoplay: true,
         smartSpeed: 1000,
         responsive: {
@@ -121,9 +114,31 @@
             }
         }
     });
-    
+
+    (function () {
+        emailjs.init("OovhGcypvcbhwvwbZ");  
+    })();
+
+    $('#contactForm').on('submit', function(event) {
+        event.preventDefault();
+
+        const name = $('#name').val();
+        const email = $('#email').val();
+        const subject = $('#subject').val();
+        const message = $('#message').val();
+
+        emailjs.send("service_mypocfa", "template_16kpebp", {
+            from_name: name,
+            from_email: email,
+            subject: subject,
+            message: message
+        }).then(function(response) {
+            alert("Message sent successfully!");
+        }, function(error) {
+            alert("Failed to send message. Please try again.");
+        });
+    });
+
 })(jQuery);
-
-
 
 
